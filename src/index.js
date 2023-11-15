@@ -68,12 +68,13 @@ function Header() {
 
 function Menu() {
   const pizzas = pizzaData;
-  const numPizza = pizzas.length;
+  // const numPizza = pizzas.length;
+  const numPizza = [];
 
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {numPizza > 0 && (
+      {numPizza > 0 ? (
         <ul className="pizza">
           {pizzas.map((item) => {
             return (
@@ -86,6 +87,8 @@ function Menu() {
             );
           })}
         </ul>
+      ) : (
+        <p>We're still working for our menu. Please Come Back Later</p>
       )}
     </main>
   );
