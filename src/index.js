@@ -68,8 +68,9 @@ function Header() {
 
 function Menu() {
   const pizzas = pizzaData;
-  // const numPizza = pizzas.length;
-  const numPizza = [];
+  const numPizza = pizzas.length;
+
+  // const numPizza = [];
 
   return (
     <main className="menu">
@@ -83,6 +84,7 @@ function Menu() {
                 ingredients={item.ingredients}
                 photoName={item.photoName}
                 price={"$" + item.price}
+                soldOut={item.soldOut}
               />
             );
           })}
@@ -95,6 +97,8 @@ function Menu() {
 }
 
 function Pizza(props) {
+  console.log(props);
+  if (props.soldOut) return null;
   return (
     <div className="pizza">
       <img src={props.photoName} alt={props.name}></img>
@@ -102,6 +106,7 @@ function Pizza(props) {
         <h3>{props.name}</h3>
         <p>{props.ingredients}</p>
         <span>{props.price}</span>
+        <span>{props.soldOut}</span>
       </div>
     </div>
   );
@@ -109,9 +114,14 @@ function Pizza(props) {
 
 function Footer() {
   const hour = new Date().getHours();
-  const open = 8;
+  const open = 10;
   const close = 22;
   const isOpen = hour >= open && hour <= close;
+
+  if (!isOpen) {
+    return "CLOSED";
+  }
+
   return (
     <footer className="footer">
       {isOpen && (
