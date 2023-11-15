@@ -1,3 +1,5 @@
+"use strict";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -123,14 +125,16 @@ function Footer() {
   }
 
   return (
-    <footer className="footer">
-      {isOpen && (
-        <div className="order">
-          <p>We are open untill {close}. Come visit us Or Order Online!</p>
-          <button className="btn">Order</button>
-        </div>
-      )}
-    </footer>
+    <footer className="footer">{isOpen && <Order closeHour={close} />}</footer>
+  );
+}
+
+function Order({ closeHour }) {
+  return (
+    <div className="order">
+      <p>We are open untill {closeHour}. Come visit us Or Order Online!</p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
