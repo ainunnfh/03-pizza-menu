@@ -58,7 +58,6 @@ function App() {
 }
 
 function Header() {
-  //   const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
   const style = {};
   return (
     <header className="header">
@@ -71,18 +70,18 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza
-        name="Pizza Spinaci"
-        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-        photoName="pizzas/spinaci.jpg"
-        price={20}
-      />
-      <Pizza
-        name="Pizza Funghi"
-        ingredients="Tomato, mushrooms"
-        photoName="pizzas/funghi.jpg"
-        price={10}
-      />
+      {pizzaData.map((item, index) => {
+        // komplex logic
+        const order = index + 1;
+        return (
+          <Pizza
+            name={order + " " + item.name}
+            ingreditents={item.ingredients}
+            photoName={item.photoName}
+            price={"Price: $" + item.price}
+          />
+        );
+      })}
     </main>
   );
 }
@@ -94,7 +93,8 @@ function Pizza(props) {
       <div>
         <h3>{props.name}</h3>
         <p>{props.ingredients}</p>
-        <span>{props.price + 3}</span>
+        <span>{props.price}</span>
+        <span>{props.order}</span>
       </div>
     </div>
   );
@@ -105,11 +105,10 @@ function Footer() {
   const open = 8;
   const close = 22;
   const isOpen = hour >= open && hour <= close;
-  //   console.log(moment(new Date().toLocaleTimeString()).format("LL"));
   return (
     <footer className="footer">
       {isOpen
-        ? new Date().toLocaleTimeString() + ". We are currently Open"
+        ? new Date().toLocaleTimeString() + ". We are currently open!"
         : new Date().toLocaleTimeString() + ". Sorry, we are closed"}
     </footer>
   );
