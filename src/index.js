@@ -70,27 +70,33 @@ function Header() {
 
 function Menu() {
   const pizzas = pizzaData;
-  const numPizza = pizzas.length;
+  // const numPizza = pizzas.length;
 
-  // const numPizza = [];
+  const numPizza = [];
 
   return (
     <main className="menu">
       <h2>Our Menu</h2>
       {numPizza > 0 ? (
-        <ul className="pizza">
-          {pizzas.map((item) => {
-            return (
-              <Pizza
-                name={item.name}
-                ingredients={item.ingredients}
-                photoName={item.photoName}
-                price={"$" + item.price}
-                soldOut={item.soldOut}
-              />
-            );
-          })}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cuisine. 6 Creative dishes choose from. All from
+            our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizza">
+            {pizzas.map((item) => {
+              return (
+                <Pizza
+                  name={item.name}
+                  ingredients={item.ingredients}
+                  photoName={item.photoName}
+                  price={"$" + item.price}
+                  soldOut={item.soldOut}
+                />
+              );
+            })}
+          </ul>
+        </>
       ) : (
         <p>We're still working for our menu. Please Come Back Later</p>
       )}
@@ -125,14 +131,19 @@ function Footer() {
   }
 
   return (
-    <footer className="footer">{isOpen && <Order closeHour={close} />}</footer>
+    <footer className="footer">
+      {isOpen && <Order openHour={open} closeHour={close} />}
+    </footer>
   );
 }
 
-function Order({ closeHour }) {
+function Order({ closeHour, openHour }) {
   return (
     <div className="order">
-      <p>We are open untill {closeHour}. Come visit us Or Order Online!</p>
+      <p>
+        We are open from {openHour} until {closeHour}. Come visit us Or Order
+        Online!
+      </p>
       <button className="btn">Order</button>
     </div>
   );
